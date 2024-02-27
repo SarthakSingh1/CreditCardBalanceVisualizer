@@ -1,27 +1,23 @@
 extends layout
 
 block content
-  h1 Hackathon Starter
-  p.lead A boilerplate for Node.js web applications.
+  h1 Credit Card Interest Calculator
+  p.lead A visualization for computing total interest paid throughout a certain time period
   hr
   .row
-    .col-md-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-primary(href='#', role='button') View details »
-    .col-md-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-primary(href='#', role='button') View details »
-    .col-md-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-primary(href='#', role='button') View details »
-    .col-md-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-primary(href='#', role='button') View details »
+  form(action="/submit" method="post")
+    .form-group.row
+      label.col-md-3.col-form-label(for="totalBalance") Total Balance:
+      .col-md-9
+        input.form-control(type="number" id="totalBalance" name="totalBalance" required)
+    .form-group.row
+      label.col-md-3.col-form-label(for="apr") APR (Annual Percentage Rate):
+      .col-md-9
+        input.form-control(type="number" id="apr" name="apr" required)
+    .form-group.row
+      label.col-md-3.col-form-label(for="totalMonths") Total Months:
+      .col-md-9
+        input.form-control(type="number" id="totalMonths" name="totalMonths" required)
+    .form-group.row
+      .col-md-9.offset-md-3
+        button.btn.btn-primary(type="submit") Submit

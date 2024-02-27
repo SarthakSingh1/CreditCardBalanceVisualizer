@@ -3,7 +3,7 @@
 //    a.navbar-brand(href='/')
 //      i.fas.fa-cube
 //      | Project name
-//    button.navbar-toggler(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+//    button.navbar-toggler(type='button' data-toggle='collapse' data-target='.navbar-collapse')
 //      span.sr-only Toggle navigation
 //      span.navbar-toggler-icon
 //    .collapse.navbar-collapse
@@ -22,7 +22,7 @@
 //            a.nav-link(href='/signup') Create Account
 //        else
 //          li.dropdown(class=(title === 'Account Management') ? 'active' : undefined).nav-item
-//            a.dropdown-toggle.nav-link(href='#', data-toggle='dropdown')
+//            a.dropdown-toggle.nav-link(href='#' data-toggle='dropdown')
 //              if user.profile.picture
 //                img(src=user.profile.picture)
 //              else
@@ -40,18 +40,18 @@
 nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
   .container
     a.navbar-brand(href='/')
-      img.d-inline-block.align-text-top(src='/bootstrap-logo.svg' alt='' width='30' height='24')
-      |  Hackathon Starter
+      img.d-inline-block.align-text-top(src='/synchrony.svg' alt='' width='30' height='24')
+      |  Syncrony Financial Literacy Project
     button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarColor01' aria-controls='navbarColor01' aria-expanded='false' aria-label='Toggle navigation')
       span.navbar-toggler-icon
     #navbarColor01.collapse.navbar-collapse
       ul.navbar-nav.me-auto.mb-2.mb-lg-0
         li.nav-item
-          a.nav-link(class=(title === 'Home') ? 'active' : '', href='/') Home
+          a.nav-link(class=(title === 'Home') ? 'active' : '' href='/') Home
         li.nav-item
-          a.nav-link(class=(title === 'API Examples') ? 'active' : '', href='/api') API Examples
+          a.nav-link(class=(title === 'API Examples') ? 'active' : '' href='/api') API Examples
         li.nav-item
-          a.nav-link(class=(title === 'Contact') ? 'active' : '', href='/contact') Contact
+          a.nav-link(class=(title === 'Contact') ? 'active' : '' href='/contact') Contact
 
       form.d-flex
         if !user
