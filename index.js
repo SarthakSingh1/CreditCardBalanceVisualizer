@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const { calculateMonthsToPayoff, calculateRemainingBalanceOverTime } = require('./calculator'); // Import calculator functions
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,39 +16,45 @@ app.get('/', (req, res) => {
 
 // Route for form submission
 app.post('/calculate', (req, res) => {
-    // Perform calculations here
-    const inputData = req.body.inputData; // Assuming input field name is "inputData"
-    // Example calculation
-    const result = inputData * 2;
+    // Extract input data from request body
+    const totalBalance = parseFloat(req.body.totalBalance);
+    const apr = parseFloat(req.body.apr);
+    const maxMonthlyPayment = parseFloat(req.body.maxMonthlyPayment);
+    const extraMonthlySpend = parseFloat(req.body.extraMonthlySpend);
 
-    // Render chart with result
-    res.send(`<div><canvas id="myChart" width="400" height="400"></canvas></div>
+    // Calculate months to payoff
+    const monthsToPayoff = calculateMonthsToPayoff(totalBalance, apr, maxMonthlyPayment, extraMonthlySpend);
+
+    // Calculate remaining balance over time
+    const balanceOverTime = calculateRemainingBalanceOverTime(totalBalance, apr, maxMonthlyPayment, extraMonthlySpend);
+
+    // Render chart with remaining balance over time
+    res.send(`<div><canvas id="myChart" width="800" height="400"></canvas></div>
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script>
               var ctx = document.getElementById('myChart').getContext('2d');
               var myChart = new Chart(ctx, {
-                  type: 'bar',
+                  type: 'line',
                   data: {
-                      labels: ['Result'],
+                      labels: ${JSON.stringify(balanceOverTime.labels)},
                       datasets: [{
-                          label: 'Calculation Result',
-                          data: [${result}],
-                          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                          borderColor: 'rgba(255, 99, 132, 1)',
-                          borderWidth: 1
+                          label: 'Remaining Balance',
+                          data: ${JSON.stringify(balanceOverTime.data)},
+                          fill: false,
+                          borderColor: 'rgb(75, 192, 192)',
+                          tension: 0.1
                       }]
                   },
                   options: {
                       scales: {
-                          yAxes: [{
-                              ticks: {
-                                  beginAtZero: true
-                              }
-                          }]
+                          y: {
+                              beginAtZero: true
+                          }
                       }
                   }
               });
-            </script>`);
+            </script>
+            <div>Months to Payoff: ${monthsToPayoff}</div>`);
 });
 
 app.listen(PORT, () => {
