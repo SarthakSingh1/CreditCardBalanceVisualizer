@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Credit Card Payoff Calculator</title>
+  <link rel="stylesheet" href="../public/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Credit Card Payoff Calculator</h1>
+    <form id="calculator-form" class="input-form">
+      <!-- First input for total balance of credit card -->
+      <div class="form-group">
+        <label for="totalBalance">Total Balance of Credit Card:</label>
+        <input type="number" id="totalBalance" name="totalBalance" placeholder="Enter Total Balance" step="0.01" value="1000" required>
+      </div>
+      
+      <!-- Second input for APR -->
+      <div class="form-group">
+        <label for="apr">APR (Annual Percentage Rate):</label>
+        <input type="number" id="apr" name="apr" placeholder="Enter APR" step="0.01" min="0" value="15" required>
+      </div>
+      
+      <!-- Third input for max monthly payment -->
+      <div class="form-group">
+        <label for="maxMonthlyPayment">Max Monthly Payment:</label>
+        <input type="number" id="maxMonthlyPayment" name="maxMonthlyPayment" placeholder="Enter Max Monthly Payment" step="0.01" value="100" required>
+      </div>
+      
+      <!-- Fourth input for extra monthly spend -->
+      <div class="form-group">
+        <label for="extraMonthlySpend">Extra Monthly Spend:</label>
+        <input type="number" id="extraMonthlySpend" name="extraMonthlySpend" placeholder="Enter Extra Monthly Spend" step="0.01" value="0" required>
+      </div>
+      
+      <button type="submit">Calculate</button>
+    </form>
+  </div>
+  <div id="months-to-payoff-container">
+    <p id="months-to-payoff"></p>
+  </div>
+  <div id="chart-container" class="chart-container">
+    <canvas id="myChart" width="800" height="200"></canvas>
+  </div>
+
+  <!-- Script for Chart.js and your custom JavaScript code -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="renderGraph.js"> </script>
+</body>
+</html>
