@@ -1,29 +1,55 @@
 // calculator.js
 
 function calculateMonthsToPayoff(totalBalance, apr, maxMonthlyPayment, extraMonthlySpend) {
+    // Convert APR to monthly periodic rate
+    apr /= 100; // Convert percentage to decimal
+    let dpr = apr / 365; // Daily periodic rate
+    let mpr = dpr * 30; // Monthly periodic rate
+
     let remainingBalance = totalBalance;
     let months = 0;
 
     while (remainingBalance > 0) {
-        remainingBalance *= (1 + apr / 12 / 100); // Add monthly interest
-        remainingBalance -= maxMonthlyPayment + extraMonthlySpend; // Subtract monthly payment
+        // Calculate interest accrued
+        let interest = remainingBalance * mpr;
+        // Calculate total payment (minimum payment + extra spend)
+        let totalPayment = Math.min(maxMonthlyPayment, remainingBalance + interest + extraMonthlySpend);
+        // Update remaining balance
+        remainingBalance = remainingBalance + interest + extraMonthlySpend - totalPayment;
+        // Increment month counter
         months++;
+
+        console.log(`Month ${months}: Remaining Balance = $${remainingBalance.toFixed(2)}`);
     }
 
     return months;
 }
 
 function calculateRemainingBalanceOverTime(totalBalance, apr, maxMonthlyPayment, extraMonthlySpend) {
+    // Convert APR to monthly periodic rate
+    apr /= 100; // Convert percentage to decimal
+    let dpr = apr / 365; // Daily periodic rate
+    let mpr = dpr * 30; // Monthly periodic rate
+
     let remainingBalance = totalBalance;
+    let months = 0;
+
     const labels = [];
     const data = [];
 
     while (remainingBalance > 0) {
-        labels.push(data.length + 1); // Month number
-        data.push(remainingBalance); // Remaining balance for the month
+        // Calculate interest accrued
+        let interest = remainingBalance * mpr;
+        // Calculate total payment (minimum payment + extra spend)
+        let totalPayment = Math.min(maxMonthlyPayment, remainingBalance + interest + extraMonthlySpend);
+        // Update remaining balance
+        remainingBalance = remainingBalance + interest + extraMonthlySpend - totalPayment;
+        // Increment month counter
+        months++;
 
-        remainingBalance *= (1 + apr / 12 / 100); // Add monthly interest
-        remainingBalance -= maxMonthlyPayment + extraMonthlySpend; // Subtract monthly payment
+        // Add data point to labels and data arrays
+        labels.push(months);
+        data.push(remainingBalance);
     }
 
     return { labels, data };
