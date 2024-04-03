@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Credit Card Payoff Calculator</title>
-<link rel="stylesheet" href="../public/css/styles.css">
+  <link rel="stylesheet" href="../public/css/styles.css">
 </head>
 <body>
   <div class="container">
     <h1>Credit Card Payoff Calculator</h1>
-    <form action="/calculate" method="post" class="input-form">
+    <form id="calculator-form" class="input-form">
       <!-- First input for total balance of credit card -->
       <div class="form-group">
         <label for="totalBalance">Total Balance of Credit Card:</label>
@@ -37,5 +37,63 @@
       <button type="submit">Calculate</button>
     </form>
   </div>
+
+  <div id="chart-container" class="chart-container">
+    <canvas id="myChart" width="800" height="400"></canvas>
+  </div>
+
+  <!-- Script for Chart.js and your custom JavaScript code -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const form = document.getElementById('calculator-form');
+      const chartContainer = document.getElementById('chart-container');
+      const ctx = document.getElementById('myChart').getContext('2d');
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Serialize form data
+        const formData = new FormData(form);
+        const serializedForm = {};
+        for (const [key, value] of formData.entries()) {
+          serializedForm[key] = value;
+        }
+
+        // Send form data to server using AJAX request
+        fetch('/calculate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(serializedForm)
+        })
+        .then(response => response.json())
+        .then(data => {
+          const myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: data.balanceOverTime.labels,
+              datasets: [{
+                label: 'Remaining Balance',
+                data: data.balanceOverTime.data,
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        })
+        .catch(error => console.error('Error:', error));
+      });
+    });
+  </script>
 </body>
 </html>
