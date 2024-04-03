@@ -37,7 +37,9 @@
       <button type="submit">Calculate</button>
     </form>
   </div>
-
+  <div id="months-to-payoff-container">
+    <p id="months-to-payoff"></p>
+  </div>
   <div id="chart-container" class="chart-container">
     <canvas id="myChart" width="800" height="400"></canvas>
   </div>
@@ -46,6 +48,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
+  const monthsToPayoffContainer = document.getElementById('months-to-payoff');
   const form = document.getElementById('calculator-form');
   const ctx = document.getElementById('myChart').getContext('2d');
   let myChart; // Define myChart variable outside event listener
@@ -96,6 +99,8 @@
           }
         }
       });
+    monthsToPayoffContainer.textContent = `Months to Payoff: ${data.monthsToPayoff}`;
+
     })
     .catch(error => console.error('Error:', error));
   });
