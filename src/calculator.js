@@ -19,7 +19,7 @@ function calculateMonthsToPayoff(totalBalance, apr, maxMonthlyPayment, extraMont
         // Increment month counter
         months++;
 
-        console.log(`Month ${months}: Remaining Balance = $${remainingBalance.toFixed(2)}`);
+        // console.log(`Month ${months}: Remaining Balance = $${remainingBalance.toFixed(2)}`);
     }
 
     return months;
