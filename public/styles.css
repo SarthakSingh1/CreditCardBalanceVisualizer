@@ -39,3 +39,16 @@ input[type="number"] {
 .styled-button:hover {
     background-color: #45a049; /* Darker Green */
 }
+
+.chart-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.pie-chart-container {
+  flex: 1;
+}
+
+.line-chart-container {
+  flex: 3;
+}

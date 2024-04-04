@@ -40,14 +40,20 @@
         <button type="submit" class="styled-button">Submit</button>
     
       </form>
-</div>
+  </div>
 
   <div id="months-to-payoff-container">
     <p id="months-to-payoff"></p>
   </div>
-  <div id="chart-container" class="chart-container">
-    <canvas id="myChart" width="800" height="200"></canvas>
+  <div class="chart-container">
+    <div class="pie-chart-container">
+      <canvas id="myPieChart" width="200" height="200"></canvas>
+    </div>
+    <div class="line-chart-container">
+      <canvas id="myChart" width="800" height="200"></canvas>
+    </div>
   </div>
+
 
   <!-- Script for Chart.js and your custom JavaScript code -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

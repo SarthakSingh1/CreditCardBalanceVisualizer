@@ -2,9 +2,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const monthsToPayoffContainer = document.getElementById('months-to-payoff');
     const form = document.getElementById('calculator-form');
     const ctx = document.getElementById('myChart').getContext('2d');
+    const ctxPie = document.getElementById('myPieChart').getContext('2d'); // Get context for pie chart
     let myChart; // Define myChart variable outside event listener
+    let myPieChart; // Define myPieChart variable outside event listener
 
     form.addEventListener('submit', function (event) {
+        console.log("Form submitted");
         event.preventDefault(); // Prevent default form submission
 
         // Serialize form data
@@ -13,6 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
         for (const [key, value] of formData.entries()) {
             serializedForm[key] = value;
         }
+
+        console.log("Sent the stuff");
+
 
         // Send form data to server using AJAX request
         fetch('/calculate', {
@@ -24,35 +30,64 @@ document.addEventListener("DOMContentLoaded", function () {
         })
             .then(response => response.json())
             .then(data => {
-                // Destroy the existing chart instance if it exists
+                console.log(data);
+                // Destroy the existing chart instances if they exist
                 if (myChart) {
                     myChart.destroy();
                 }
+                if (myPieChart) {
+                    myPieChart.destroy();
+                }
 
-                // Create a new chart instance with updated data
+                // Create a new line chart instance with updated data
                 myChart = new Chart(ctx, {
-                    type: 'line',
+                    type: 'bar',
                     data: {
-                        labels: data.balanceOverTime.labels,
+                        labels: Array.from({ length: data.months }, (_, i) => i + 1),
                         datasets: [{
-                            label: 'Remaining Balance',
-                            data: data.balanceOverTime.data,
-                            fill: false,
-                            borderColor: 'rgb(75, 192, 192)',
-                            tension: 0.1
+                            label: 'Principal',
+                            data: data.princpial_data,
+                            backgroundColor: '#FBC600' // Blue color for principal
+                        }, {
+                            label: 'Interest',
+                            data: data.interest_data,
+                            backgroundColor: '#34657F' // Red color for interest
                         }]
                     },
                     options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
                         scales: {
+                            x: {
+                                stacked: true // Stack bars horizontally
+                            },
                             y: {
-                                beginAtZero: true
+                                stacked: true // Stack bars vertically
                             }
                         }
                     }
                 });
-                monthsToPayoffContainer.textContent = `Months to Payoff: ${data.monthsToPayoff}`;
+
+                // Create a new pie chart instance with updated data
+                myPieChart = new Chart(ctxPie, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Principal', 'Interest'],
+                        datasets: [{
+                            data: [data.totalPrincipal, data.totalInterest],
+                            backgroundColor: ['#FBC600', '#34657F']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+
+                monthsToPayoffContainer.textContent = `Months to Payoff: ${data.months}`;
 
             })
             .catch(error => console.error('Error:', error));
     });
+    console.log("Got to the end");
 });

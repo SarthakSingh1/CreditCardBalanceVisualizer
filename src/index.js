@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path'); // Import path module
 
-const { calculateMonthsToPayoff, calculateRemainingBalanceOverTime } = require('./calculator'); // Import calculator functions
+const { calculateMonthsToPayoff } = require('./calculator'); // Import calculator functions
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,25 +20,20 @@ app.get('/', (req, res) => {
 // Route for form submission
 app.post('/calculate', (req, res) => {
     // Extract input data from request body
-    console.log(req.body)
+    console.log("Called calculate route")
     const totalBalance = parseFloat(req.body.totalBalance);
     const apr = parseFloat(req.body.apr);
     const maxMonthlyPayment = parseFloat(req.body.maxMonthlyPayment);
     const extraMonthlySpend = parseFloat(req.body.extraMonthlySpend);
 
+
     // Perform calculations
-    const monthsToPayoff = calculateMonthsToPayoff(totalBalance, apr, maxMonthlyPayment, extraMonthlySpend);
-    const balanceOverTime = calculateRemainingBalanceOverTime(totalBalance, apr, maxMonthlyPayment, extraMonthlySpend);
+    const calculationResult = calculateMonthsToPayoff(totalBalance, apr, maxMonthlyPayment, extraMonthlySpend);
+
 
     // Send the response
-    res.send({
-        totalBalance,
-        apr,
-        maxMonthlyPayment,
-        extraMonthlySpend,
-        monthsToPayoff,
-        balanceOverTime
-    });
+    console.log("Sent a response");
+    res.send(calculationResult);
 });
 
 
