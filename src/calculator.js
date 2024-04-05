@@ -10,8 +10,11 @@ function calculateMonthsToPayoff(totalBalance, apr, maxMonthlyPayment, extraMont
     let months = 0;
     let totalInterest = 0;
     let totalPayments = 0;
+    let curr_total_balance = totalBalance; 
     const princpial_data = [];
     const interest_data = [];
+    const balance_over_time = [];
+
 
     while (remainingBalance > 0) {
         // Calculate interest accrued
@@ -30,7 +33,8 @@ function calculateMonthsToPayoff(totalBalance, apr, maxMonthlyPayment, extraMont
                     "interest_data": [],
                     "princpial_data": [],
                     "totalInterest": 0,
-                    "totalPrincipal": 0
+                    "totalPrincipal": 0,
+                    "balance_over_time": []
         };
         }
 
@@ -40,10 +44,12 @@ function calculateMonthsToPayoff(totalBalance, apr, maxMonthlyPayment, extraMont
         // console.log(`Month ${months}: Remaining Balance = $${remainingBalance.toFixed(2)}`);
         interest_data.push(interest);
         princpial_data.push(totalPayment - interest);
+        curr_total_balance -= (totalPayment - interest - extraMonthlySpend);
+        balance_over_time.push(curr_total_balance);
     }
     let totalPrincipal = totalPayments - totalInterest;
 
-    return { months, interest_data, princpial_data, totalInterest, totalPrincipal };
+    return { months, interest_data, princpial_data, totalInterest, totalPrincipal, balance_over_time };
 }
 
 module.exports = {

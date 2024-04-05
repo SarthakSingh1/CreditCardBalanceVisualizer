@@ -1,12 +1,29 @@
-
 label {
   display: block;
   margin-bottom: 10px;
+  font-family: Arial, sans-serif; /* Change font family for labels */
 }
+
 
 input[type="number"] {
   padding: 8px;
   margin-bottom: 10px;
+  outline: none; /* Remove outline */
+  border: none; /* Remove border */
+}
+
+
+  .currencyinput {
+    position: relative;
+  }
+
+.input-form {
+    display: inline-block; /* Make the form display inline-block */
+    text-align: left; /* Reset text alignment inside the form */
+}
+
+.form-container {
+    text-align: center; /* Center align the content */
 }
 
 .form-group {
@@ -14,11 +31,13 @@ input[type="number"] {
   margin-right: 20px;
   text-align: left;
   vertical-align: top;
-  background-color: #f0f0f0;
+  background-color: #f8f8f8; /* Very light shade of off-white */
   padding: 15px;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Adjusted box-shadow */
 }
+
+
 
 .styled-button {
     background-color: #fcdf00; /* Green */
@@ -41,14 +60,18 @@ input[type="number"] {
 }
 
 .chart-container {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 }
 
 .pie-chart-container {
-  flex: 1;
+    flex: 1;
 }
 
 .line-chart-container {
-  flex: 3;
+    flex: 3;
+}
+
+.additional-chart-container {
+    flex: 2; 
 }

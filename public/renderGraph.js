@@ -3,8 +3,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById('calculator-form');
     const ctx = document.getElementById('myChart').getContext('2d');
     const ctxPie = document.getElementById('myPieChart').getContext('2d'); // Get context for pie chart
+    const final_cart = document.getElementById('additionalChart').getContext('2d');
+
     let myChart; // Define myChart variable outside event listener
     let myPieChart; // Define myPieChart variable outside event listener
+    let finalChart;
 
     form.addEventListener('submit', function (event) {
         console.log("Form submitted");
@@ -38,6 +41,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (myPieChart) {
                     myPieChart.destroy();
                 }
+                if (finalChart) {
+                    finalChart.destroy();
+                }
 
                 // Create a new line chart instance with updated data
                 myChart = new Chart(ctx, {
@@ -63,6 +69,30 @@ document.addEventListener("DOMContentLoaded", function () {
                             },
                             y: {
                                 stacked: true // Stack bars vertically
+                            }
+                        }
+                    }
+                });
+
+                finalChart = new Chart(final_cart, { 
+                    type: 'bar',
+                    data: {
+                        labels: Array.from({ length: data.months }, (_, i) => i + 1),
+                        datasets: [{
+                            label: 'Principal',
+                            data: data.balance_over_time,
+                            backgroundColor: '#FBC600' // Blue color for principal
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                stacked: true 
+                            },
+                            y: {
+                                stacked: true 
                             }
                         }
                     }

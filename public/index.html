@@ -7,14 +7,14 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
- <div class="container">
+ <div class="form-container">
     <h1>Credit Card Payoff Calculator</h1>
     <form id="calculator-form" class="input-form">
         <!-- First input for total balance of credit card -->
         <div class="form-group inline">
             <label for="totalBalance">Total Balance of Credit Card:</label>
             <br> <!-- Add line break to move the input to the next line -->
-            <input type="number" id="totalBalance" name="totalBalance" placeholder="Enter Total Balance" step="0.01" value="1000" required>
+            <span class="currencyinput">$<input type="number" id="totalBalance" name="totalBalance" placeholder="Enter Total Balance" step="0.01" value="1000" required>
         </div>
 
         <!-- Second input for APR -->
@@ -28,31 +28,34 @@
         <div class="form-group inline">
             <label for="maxMonthlyPayment">Max Monthly Payment:</label>
             <br> <!-- Add line break to move the input to the next line -->
-            <input type="number" id="maxMonthlyPayment" name="maxMonthlyPayment" placeholder="Enter Max Monthly Payment" step="0.01" value="100" required>
+             <span class="currencyinput">$<input type="number" id="maxMonthlyPayment" name="maxMonthlyPayment" placeholder="Enter Max Monthly Payment" step="0.01" value="100" required>
         </div>
 
         <!-- Fourth input for extra monthly spend -->
         <div class="form-group inline">
             <label for="extraMonthlySpend">Extra Monthly Spend:</label>
             <br> <!-- Add line break to move the input to the next line -->
-            <input type="number" id="extraMonthlySpend" name="extraMonthlySpend" placeholder="Enter Extra Monthly Spend" step="0.01" value="0" required>
+             <span class="currencyinput">$<input type="number" id="extraMonthlySpend" name="extraMonthlySpend" placeholder="Enter Extra Monthly Spend" step="0.01" value="0" required>
         </div>
         <button type="submit" class="styled-button">Submit</button>
     
       </form>
   </div>
 
-  <div id="months-to-payoff-container">
+<div id="months-to-payoff-container">
     <p id="months-to-payoff"></p>
-  </div>
-  <div class="chart-container">
+</div>
+<div class="chart-container">
     <div class="pie-chart-container">
-      <canvas id="myPieChart" width="200" height="200"></canvas>
+        <canvas id="myPieChart" width="200" height="200"></canvas>
     </div>
     <div class="line-chart-container">
-      <canvas id="myChart" width="800" height="200"></canvas>
+        <canvas id="myChart" width="800" height="200"></canvas>
     </div>
-  </div>
+    <div class="additional-chart-container"> <!-- New container for additional chart -->
+        <canvas id="additionalChart" width="400" height="200"></canvas> <!-- New canvas for additional chart -->
+    </div>
+</div>
 
 
   <!-- Script for Chart.js and your custom JavaScript code -->
