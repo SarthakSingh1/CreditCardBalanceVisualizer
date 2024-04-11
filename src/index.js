@@ -36,6 +36,11 @@ app.post('/calculate', (req, res) => {
     res.send(calculationResult);
 });
 
+app.get('/compare', (req, res) => {
+    console.log("Compare called"); 
+    res.sendFile(path.resolve(__dirname, '..', 'public', 'compare.html'));
+});
+
 
 
 app.listen(PORT, () => {

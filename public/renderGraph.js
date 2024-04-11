@@ -5,10 +5,33 @@ document.addEventListener("DOMContentLoaded", function () {
     const ctx = document.getElementById('myChart').getContext('2d');
     const ctxPie = document.getElementById('myPieChart').getContext('2d'); // Get context for pie chart
     const final_cart = document.getElementById('additionalChart').getContext('2d');
+    const secondButton = document.getElementById('compare-button');
+
 
     let myChart; // Define myChart variable outside event listener
     let myPieChart; // Define myPieChart variable outside event listener
     let finalChart;
+
+    secondButton.addEventListener('click', function (event) {
+        // Code for the second button click event
+        event.preventDefault(); // Prevent default button click behavior
+
+        fetch('/compare')
+            .then(response => response.text())
+            .then(html => {
+                // Replace the current page's content with the content of compare.html
+                document.body.innerHTML = html;
+
+                // Access elements inside compare.html and set their values
+                const element = document.getElementById('total-interest-paid');
+                element.textContent = 'New value'; // Example of setting a variable
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        console.log("Compare button Pressed");
+        // Rest of the code...
+    });
 
     form.addEventListener('submit', function (event) {
         console.log("Form submitted");
@@ -21,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
             serializedForm[key] = value;
         }
 
-        console.log("Sent the stuff");
+        console.log("About to call calculate");
 
 
         // Send form data to server using AJAX request
