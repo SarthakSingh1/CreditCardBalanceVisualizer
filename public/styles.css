@@ -25,6 +25,11 @@ input[type="number"] {
 .form-container {
     text-align: center; /* Center align the content */
 }
+.button-wrapper {
+    margin-top: 10px; /* Add some top margin to separate the button from the form */
+    text-align: center; /* Center align the button */
+
+}
 
 .form-group {
   display: inline-block;

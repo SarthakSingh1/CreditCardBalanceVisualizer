@@ -37,7 +37,9 @@
             <br> <!-- Add line break to move the input to the next line -->
              <span class="currencyinput">$<input type="number" id="extraMonthlySpend" name="extraMonthlySpend" placeholder="Enter Extra Monthly Spend" step="0.01" value="0" required>
         </div>
+        <div class="button-wrapper">
         <button type="submit" class="styled-button">Submit</button>
+        </div>
     
       </form>
   </div>
@@ -45,6 +47,11 @@
 <div id="months-to-payoff-container">
     <p id="months-to-payoff"></p>
 </div>
+<div id="total interest paid">
+    <p id="total-interest-paid"></p>
+</div>
+
+
 <div class="chart-container">
     <div class="pie-chart-container">
         <canvas id="myPieChart" width="200" height="200"></canvas>
