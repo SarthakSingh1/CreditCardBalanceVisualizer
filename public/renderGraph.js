@@ -13,24 +13,18 @@ document.addEventListener("DOMContentLoaded", function () {
     let finalChart;
 
     secondButton.addEventListener('click', function (event) {
-        // Code for the second button click event
-        event.preventDefault(); // Prevent default button click behavior
+        event.preventDefault();
 
-        fetch('/compare')
+        fetch('/compare') // Ensure this path matches the server route
             .then(response => response.text())
             .then(html => {
-                // Replace the current page's content with the content of compare.html
                 document.body.innerHTML = html;
-
-                // Access elements inside compare.html and set their values
                 const element = document.getElementById('total-interest-paid');
-                element.textContent = 'New value'; // Example of setting a variable
+                element.textContent = 'New value';
             })
             .catch(error => {
                 console.error('Error:', error);
             });
-        console.log("Compare button Pressed");
-        // Rest of the code...
     });
 
     form.addEventListener('submit', function (event) {
