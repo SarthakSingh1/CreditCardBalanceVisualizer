@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Credit Card Payoff Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+ <div class="form-container">
+    <h1>Credit Card Payoff Calculator</h1>
+    <form id="calculator-form" class="input-form">
+        <!-- First input for total balance of credit card -->
+        <div class="form-group inline">
+            <label for="totalBalance">Total Balance of Credit Card:</label>
+            <br> <!-- Add line break to move the input to the next line -->
+            <span class="currencyinput">$<input type="number" id="totalBalance1" name="totalBalance1" placeholder="Enter Total Balance" step="0.01" value="1000" required>
+        </div>
+
+        <!-- Second input for APR -->
+        <div class="form-group inline">
+            <label for="apr">APR:</label>
+            <br> <!-- Add line break to move the input to the next line -->
+            <input type="number" id="apr1" name="apr1" placeholder="Enter APR" step="0.01" min="0" value="15" required>
+        </div>
+
+        <!-- Third input for max monthly payment -->
+        <div class="form-group inline">
+            <label for="maxMonthlyPayment">Max Monthly Payment:</label>
+            <br> <!-- Add line break to move the input to the next line -->
+             <span class="currencyinput">$<input type="number" id="maxMonthlyPayment1" name="maxMonthlyPayment1" placeholder="Enter Max Monthly Payment" step="0.01" value="100" required>
+        </div>
+
+        <!-- Fourth input for extra monthly spend -->
+        <div class="form-group inline">
+            <label for="extraMonthlySpend">Extra Monthly Spend:</label>
+            <br> <!-- Add line break to move the input to the next line -->
+             <span class="currencyinput">$<input type="number" id="extraMonthlySpend1" name="extraMonthlySpend1" placeholder="Enter Extra Monthly Spend" step="0.01" value="0" required>
+        </div>
+
+        <div class="form-group inline">
+            <label for="totalBalance">Total Balance of Credit Card:</label>
+            <br> <!-- Add line break to move the input to the next line -->
+            <span class="currencyinput">$<input type="number" id="totalBalance2" name="totalBalance2" placeholder="Enter Total Balance" step="0.01" value="1000" required>
+        </div>
+
+        <!-- Second input for APR -->
+        <div class="form-group inline">
+            <label for="apr">APR:</label>
+            <br> <!-- Add line break to move the input to the next line -->
+            <input type="number" id="apr2" name="apr2" placeholder="Enter APR" step="0.01" min="0" value="15" required>
+        </div>
+
+        <!-- Third input for max monthly payment -->
+        <div class="form-group inline">
+            <label for="maxMonthlyPayment">Max Monthly Payment:</label>
+            <br> <!-- Add line break to move the input to the next line -->
+             <span class="currencyinput">$<input type="number" id="maxMonthlyPayment2" name="maxMonthlyPayment2" placeholder="Enter Max Monthly Payment" step="0.01" value="100" required>
+        </div>
+
+        <!-- Fourth input for extra monthly spend -->
+        <div class="form-group inline">
+            <label for="extraMonthlySpend">Extra Monthly Spend:</label>
+            <br> <!-- Add line break to move the input to the next line -->
+             <span class="currencyinput">$<input type="number" id="extraMonthlySpend2" name="extraMonthlySpend2" placeholder="Enter Extra Monthly Spend" step="0.01" value="0" required>
+        </div>
+
+        <div class="button-wrapper">
+            <button type="submit" class="styled-button">Submit</button>
+        </div>
+    
+
+      </form>
+  </div>
+
+<div class="monthsInterestWrapper">
+    <div class="monthsInterestContainer">
+        <div id="months-to-payoff-container">
+            <p id="months-to-payoff-1"></p>
+        </div>
+        <div id="total-interest-paid-container">
+            <p id="total-interest-paid-1"></p>
+        </div>
+    </div>
+    <div class="monthsInterestContainer">
+        <div id="months-to-payoff-container">
+            <p id="months-to-payoff-2"></p>
+        </div>
+        <div id="total-interest-paid-container">
+            <p id="total-interest-paid-2"></p>
+        </div>
+    </div>
+</div>
+
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'tab1')">Total interest vs Principal</button>
+  <button class="tablinks" onclick="openTab(event, 'tab2')">Monthly Interest Payments</button>
+  <button class="tablinks" onclick="openTab(event, 'tab3')">Principal over Time</button>
+</div>
+
+<div id="tab1" class="tabcontent">
+    <div class="chart-container-1">
+        <div class="pie-chart-container-2">
+        <canvas id="donutChart1" width="250" height="250"></canvas>
+        </div>
+        <div class="pie-chart-container-2">
+        <canvas id="donutChart2" width="250" height="250"></canvas>
+        </div>
+    </div>
+</div>
+
+<div id="tab2" class="tabcontent">
+      <div class="chart-container">
+        <div class="line-chart-container">
+        <canvas id="interestBarChart1" width="200" height="200"></canvas>
+        </div>
+        <div class="line-chart-container">
+        <canvas id="interestBarChart2" width="200" height="200"></canvas>
+        </div>
+    </div>
+</div>
+
+<div id="tab3" class="tabcontent">
+        <div class="chart-container">
+        <div class="additional-chart-container">
+        <canvas id="basicBarChart1" width="200" height="200"></canvas>
+        </div>
+        <div class="additional-chart-container">
+        <canvas id="basicBarChart2" width="200" height="200"></canvas>
+        </div>
+    </div>
+</div>
+
+
+  <!-- Script for Chart.js and your custom JavaScript code -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="renderCompareGraph.js"> </script>
+  <script>
+    function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    
+    // Hide all tab content
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    
+    // Deactivate all tab buttons
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+    }
+
+    // By default, open the first tab
+    document.getElementsByClassName("tablinks")[0].click();
+
+
+  </script>
+</body>
+</html>
