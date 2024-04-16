@@ -52,6 +52,48 @@ function calculateMonthsToPayoff(totalBalance, apr, maxMonthlyPayment, extraMont
     return { months, interest_data, princpial_data, totalInterest, totalPrincipal, balance_over_time };
 }
 
+function calculatePayment(totalBalance, apr, months, extraMonthlySpend) {
+    const monthlyInterestRate = apr / 100 / 12;
+
+    // Calculate monthly payment using the formula for an installment loan
+    const monthlyPayment = totalBalance / ((1 - Math.pow(1 + monthlyInterestRate, -months)) / monthlyInterestRate) + extraMonthlySpend;
+
+    let remainingBalance = totalBalance; 
+    let totalInterest = 0;
+    let totalPrincipal = 0;
+
+    // Arrays to store the data over time
+    let balance_over_time = [];
+    let interest_data = [];
+    let princpial_data = [];
+
+    let principalPaid;
+    let interestPaid;
+
+
+    for (let i = 0; i < months; i++) {
+        // Calculate interest for the current month
+        interestPaid = remainingBalance * monthlyInterestRate;
+
+        // Calculate principal paid for the current month
+        principalPaid = monthlyPayment - interestPaid;
+
+        // Update the principal balance
+        remainingBalance -= principalPaid;
+
+        // Store the payment details for this month
+        interest_data.push(interestPaid);
+        princpial_data.push(principalPaid);
+        
+        totalInterest += interestPaid;
+        totalPrincipal += principalPaid;
+        balance_over_time.push(remainingBalance)
+    }
+
+    return { months, interest_data, princpial_data, totalInterest, totalPrincipal, balance_over_time, monthlyPayment};
+
+}
+
 module.exports = {
-    calculateMonthsToPayoff
+    calculateMonthsToPayoff, calculatePayment
 };

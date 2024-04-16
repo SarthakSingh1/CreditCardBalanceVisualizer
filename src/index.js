@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path'); // Import path module
 
-const { calculateMonthsToPayoff } = require('./calculator'); // Import calculator functions
+const { calculateMonthsToPayoff, calculatePayment } = require('./calculator'); // Import calculator functions
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,16 +20,19 @@ app.get('/', (req, res) => {
 // Route for form submission
 app.post('/calculate', (req, res) => {
     // Extract input data from request body
+    const paymentType = req.body.paymentType; 
     const totalBalance = parseFloat(req.body.totalBalance);
     const apr = parseFloat(req.body.apr);
     const maxMonthlyPayment = parseFloat(req.body.maxMonthlyPayment);
     const extraMonthlySpend = parseFloat(req.body.extraMonthlySpend);
 
-
+    let calculationResult = {};
     // Perform calculations
-    const calculationResult = calculateMonthsToPayoff(totalBalance, apr, maxMonthlyPayment, extraMonthlySpend);
-
-
+    if (paymentType == "maxMonthlyPayment") {
+        calculationResult = calculateMonthsToPayoff(totalBalance, apr, maxMonthlyPayment, extraMonthlySpend);
+    } else {
+        calculationResult = calculatePayment(totalBalance, apr, maxMonthlyPayment, extraMonthlySpend);
+    }
     // Send the response
     res.send(calculationResult);
 });

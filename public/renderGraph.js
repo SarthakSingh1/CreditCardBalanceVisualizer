@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     form.addEventListener('submit', function (event) {
-        console.log("Form submitted");
         event.preventDefault(); // Prevent default form submission
 
         // Serialize form data
@@ -37,9 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
         for (const [key, value] of formData.entries()) {
             serializedForm[key] = value;
         }
-
-        console.log("About to call calculate");
-
 
         // Send form data to server using AJAX request
         fetch('/calculate', {
@@ -131,8 +127,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         maintainAspectRatio: false
                     }
                 });
-
+                if (data.monthlyPayment != null) {
+                    monthsToPayoffContainer.textContent = `Monthly Payment $${data.monthlyPayment.toFixed(2)}`;
+                } else {
                 monthsToPayoffContainer.textContent = `Months to Payoff: ${data.months}`;
+                }
                 let roundedInterest = data.totalInterest.toFixed(2);
 
                 totalInterestContainer.textContent =  `Total Interest Paid: $${roundedInterest}`;
