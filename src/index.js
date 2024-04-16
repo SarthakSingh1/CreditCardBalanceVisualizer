@@ -41,6 +41,27 @@ app.get('/compare', (req, res) => {
     res.sendFile(path.resolve(__dirname, '..', 'public', 'compare.html'));
 });
 
+app.post('/calculateCompare', (req, res) => {
+    console.log("Compare calculate called");
+
+    const totalBalance1 = parseFloat(req.body.totalBalance1);
+    const apr1 = parseFloat(req.body.apr1);
+    const maxMonthlyPayment1 = parseFloat(req.body.maxMonthlyPayment1);
+    const extraMonthlySpend1 = parseFloat(req.body.extraMonthlySpend1);
+
+    const totalBalance2 = parseFloat(req.body.totalBalance2);
+    const apr2 = parseFloat(req.body.apr2);
+    const maxMonthlyPayment2 = parseFloat(req.body.maxMonthlyPayment2);
+    const extraMonthlySpend2 = parseFloat(req.body.extraMonthlySpend2);
+
+    const calculationResult1 = calculateMonthsToPayoff(totalBalance1, apr1, maxMonthlyPayment1, extraMonthlySpend1);
+    const calculationResult2 = calculateMonthsToPayoff(totalBalance2, apr2, maxMonthlyPayment2, extraMonthlySpend2);
+
+    res.send({"firstGraphs": calculationResult1, "secondGraphs": calculationResult2});
+});
+
+
+
 
 
 app.listen(PORT, () => {
