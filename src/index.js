@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('public'));
-app.use(express.json()); 
+app.use(express.json());
 
 // Route for homepage
 app.get('/', (req, res) => {
@@ -37,12 +37,10 @@ app.post('/calculate', (req, res) => {
 });
 
 app.get('/compare', (req, res) => {
-    console.log("Compare called"); 
     res.sendFile(path.resolve(__dirname, '..', 'public', 'compare.html'));
 });
 
 app.post('/calculateCompare', (req, res) => {
-    console.log("Compare calculate called");
 
     const totalBalance1 = parseFloat(req.body.totalBalance1);
     const apr1 = parseFloat(req.body.apr1);
@@ -57,7 +55,7 @@ app.post('/calculateCompare', (req, res) => {
     const calculationResult1 = calculateMonthsToPayoff(totalBalance1, apr1, maxMonthlyPayment1, extraMonthlySpend1);
     const calculationResult2 = calculateMonthsToPayoff(totalBalance2, apr2, maxMonthlyPayment2, extraMonthlySpend2);
 
-    res.send({"firstGraphs": calculationResult1, "secondGraphs": calculationResult2});
+    res.send({ "firstGraphs": calculationResult1, "secondGraphs": calculationResult2 });
 });
 
 

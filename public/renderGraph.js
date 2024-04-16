@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const monthsToPayoffContainer = document.getElementById('months-to-payoff');
-    const totalInterestContainer = document.getElementById("total-interest-paid")
+    const totalInterestContainer = document.getElementById("total-interest-paid");
     const form = document.getElementById('calculator-form');
     const ctx = document.getElementById('myChart').getContext('2d');
     const ctxPie = document.getElementById('myPieChart').getContext('2d'); // Get context for pie chart
