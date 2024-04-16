@@ -55,6 +55,25 @@ input[type="number"] {
   max-width: 200px; /* Set a maximum width to prevent excessive stretching */
 }
 
+.compare-form-group-select {
+  margin: 0 auto; /* Center the container horizontally */
+  text-align: left;
+  background-color: #f8f8f8; /* Very light shade of off-white */
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Adjusted box-shadow */
+  width: auto; /* Allow the width to adjust based on content */
+  max-width: 200px; /* Set a maximum width to prevent excessive stretching */
+    margin-bottom: 20px; /* Add padding under the container */
+
+}
+
+.compare-form-group-select label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+
 
 
 

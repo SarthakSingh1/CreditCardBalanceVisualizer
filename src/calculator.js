@@ -88,6 +88,8 @@ function calculatePayment(totalBalance, apr, months, extraMonthlySpend) {
         totalInterest += interestPaid;
         totalPrincipal += principalPaid;
         balance_over_time.push(Math.abs(remainingBalance))
+
+        remainingBalance +=extraMonthlySpend;
     }
 
     return { months, interest_data, princpial_data, totalInterest, totalPrincipal, balance_over_time, monthlyPayment};

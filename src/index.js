@@ -55,7 +55,6 @@ app.post('/calculateCompare', (req, res) => {
     
     let calculationResult1 = {};
     let calculationResult2 = {};
-    console.log(req.body.paymentType);
     if (req.body.paymentType == "maxMonthlyPayment") {
         calculationResult1 = calculateMonthsToPayoff(totalBalance1, apr1, maxMonthlyPayment1, extraMonthlySpend1);
         calculationResult2 = calculateMonthsToPayoff(totalBalance2, apr2, maxMonthlyPayment2, extraMonthlySpend2);
