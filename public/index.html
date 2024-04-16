@@ -32,14 +32,23 @@
             </div>
         </div>
 
+        <div class="form-group inline">
+        <label for="paymentType">Months or max monthly payment</label>
+            <select id="paymentType" name="paymentType" required>
+            <option value="totalMonths">Total Months</option>
+            <option value="maxMonthlyPayment">Max Monthly Payment</option>
+                </select>
+            </div>
+
+
         <!-- Third input for max monthly payment -->
         <div class="form-group inline">
-            <label for="maxMonthlyPayment">Max Monthly Payment:</label>
+            <label for="maxMonthlyPayment">Max Monthly Payment/Total Months:</label>
             <br> <!-- Add line break to move the input to the next line -->
-             <span class="currencyinput">$<input type="number" id="maxMonthlyPayment" name="maxMonthlyPayment" placeholder="Enter Max Monthly Payment" step="0.01" value="100" required></span>
+            <input type="number" id="maxMonthlyPayment" name="maxMonthlyPayment" placeholder="Enter Max Monthly Payment" step="0.01" value="100" required>
             <div class="tooltip">
                 <span class="question-mark">?</span>
-                <span class="tooltip-text">This is the maximum amount you can afford to pay towards your credit card balance each month.<a href="detailed_monthly_payment.html" target="_blank">Learn more</a></span>
+                <span class="tooltip-text">If you selected max monthly payment this is the maximum amount you can afford to pay towards your credit card balance each month.<a href="detailed_monthly_payment.html" target="_blank">Learn more</a></span>
             </div>
         </div>
 
@@ -57,6 +66,7 @@
             <button type="submit" class="styled-button">Submit</button>
             <button type="button" id="compare-button" class="styled-button" onclick="window.location.href = '/compare';">Compare</button> 
         </div>
+
     </form>
 </div>
 
