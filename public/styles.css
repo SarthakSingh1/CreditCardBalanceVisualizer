@@ -69,8 +69,18 @@ input[type="number"] {
     flex-direction: row;
 }
 
+.chart-container-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .pie-chart-container {
     flex: 1;
+}
+
+.pie-chart-container-2 {
+    flex: 3;
 }
 
 .line-chart-container {
@@ -111,15 +121,7 @@ input[type="number"] {
 
 .tab {
   overflow: hidden;
-}
-
-.tab button {
-  background-color: #f2f2f2;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 10px 20px;
-  transition: 0.3s;
+  text-align: center; /* Center align the buttons */
 }
 
 .tab button:hover {
@@ -138,3 +140,31 @@ input[type="number"] {
 .graph {
   margin-bottom: 20px;
 }
+
+/* Make the buttons larger */
+.tab button {
+  background-color: #f2f2f2;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 15px 30px; /* Increased padding for larger buttons */
+  transition: 0.3s;
+  font-size: 16px; /* Adjust font size */
+  margin: 10px; /* Add margin for spacing */
+}
+
+.graph-divider {
+  height: 100%;
+  width: 25px; /* Set the width of the divider */
+  background-color: #ccc; /* Add a background color to the divider */
+  display: inline-block; /* Display the divider as inline-block */
+  margin: 0 20px; /* Adjust margin for spacing */
+}
+
+
+  .vertical {
+    border-left: 6px solid blue;
+    height: 200px;
+    position:absolute;
+    left: 50%;
+  }
