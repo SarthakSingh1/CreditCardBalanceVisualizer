@@ -42,6 +42,20 @@ input[type="number"] {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Adjusted box-shadow */
 }
 
+.compare-form-group {
+  display: inline-block;
+  margin-right: 10px; /* Reduced margin for a more compact layout */
+  text-align: left;
+  vertical-align: top;
+  background-color: #f8f8f8; /* Very light shade of off-white */
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Adjusted box-shadow */
+  width: auto; /* Allow the width to adjust based on content */
+  max-width: 200px; /* Set a maximum width to prevent excessive stretching */
+}
+
+
 
 
 .styled-button {

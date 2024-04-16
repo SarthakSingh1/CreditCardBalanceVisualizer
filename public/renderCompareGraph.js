@@ -213,17 +213,21 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
                     }
                 });
-
-                monthsToPayoffContainer1.textContent = `Months to Payoff: ${firstGraphs.months}`;
+                if (firstGraphs.monthlyPayment != null) {
+                    monthsToPayoffContainer1.textContent = `Monthly Payment $${firstGraphs.monthlyPayment.toFixed(2)}`;
+                } else {
+                    monthsToPayoffContainer1.textContent = `Months to Payoff: ${firstGraphs.months}`;
+                }
                 let roundedInterest = firstGraphs.totalInterest.toFixed(2);
-
                 totalInterestContainer1.textContent = `Total Interest Paid: $${roundedInterest}`;
 
+                if (secondGraphs.monthlyPayment != null) {
+                    monthsToPayoffContainer2.textContent = `Monthly Payment: $${secondGraphs.monthlyPayment.toFixed(2) }`;
+                } else {
                 monthsToPayoffContainer2.textContent = `Months to Payoff: ${secondGraphs.months}`;
+                }
                 let roundedInterest2 = secondGraphs.totalInterest.toFixed(2);
-
                 totalInterestContainer2.textContent = `Total Interest Paid: $${roundedInterest2}`;
-
             })
             .catch(error => console.error('Error:', error));
     });

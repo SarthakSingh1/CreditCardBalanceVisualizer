@@ -52,9 +52,17 @@ app.post('/calculateCompare', (req, res) => {
     const apr2 = parseFloat(req.body.apr2);
     const maxMonthlyPayment2 = parseFloat(req.body.maxMonthlyPayment2);
     const extraMonthlySpend2 = parseFloat(req.body.extraMonthlySpend2);
-
-    const calculationResult1 = calculateMonthsToPayoff(totalBalance1, apr1, maxMonthlyPayment1, extraMonthlySpend1);
-    const calculationResult2 = calculateMonthsToPayoff(totalBalance2, apr2, maxMonthlyPayment2, extraMonthlySpend2);
+    
+    let calculationResult1 = {};
+    let calculationResult2 = {};
+    console.log(req.body.paymentType);
+    if (req.body.paymentType == "maxMonthlyPayment") {
+        calculationResult1 = calculateMonthsToPayoff(totalBalance1, apr1, maxMonthlyPayment1, extraMonthlySpend1);
+        calculationResult2 = calculateMonthsToPayoff(totalBalance2, apr2, maxMonthlyPayment2, extraMonthlySpend2);
+    } else {
+        calculationResult1 = calculatePayment(totalBalance1, apr1, maxMonthlyPayment1, extraMonthlySpend1);
+        calculationResult2 = calculatePayment(totalBalance2, apr2, maxMonthlyPayment2, extraMonthlySpend2); 
+    }
 
     res.send({ "firstGraphs": calculationResult1, "secondGraphs": calculationResult2 });
 });
