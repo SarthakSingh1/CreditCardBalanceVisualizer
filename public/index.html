@@ -7,14 +7,18 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
- <div class="form-container">
+<div class="form-container">
     <h1>Credit Card Payoff Calculator</h1>
     <form id="calculator-form" class="input-form">
         <!-- First input for total balance of credit card -->
         <div class="form-group inline">
             <label for="totalBalance">Total Balance of Credit Card:</label>
             <br> <!-- Add line break to move the input to the next line -->
-            <span class="currencyinput">$<input type="number" id="totalBalance" name="totalBalance" placeholder="Enter Total Balance" step="0.01" value="1000" required>
+            <span class="currencyinput">$<input type="number" id="totalBalance" name="totalBalance" placeholder="Enter Total Balance" step="0.01" value="1000" required></span>
+        <div class="tooltip">
+            <span class="question-mark">?</span>
+            <span class="tooltip-text">This is the total outstanding balance on your credit card. <a href="detailed_balance_page.html" target="_blank">Learn more</a></span>
+        </div>
         </div>
 
         <!-- Second input for APR -->
@@ -22,29 +26,39 @@
             <label for="apr">APR:</label>
             <br> <!-- Add line break to move the input to the next line -->
             <input type="number" id="apr" name="apr" placeholder="Enter APR" step="0.01" min="0" value="15" required>
+            <div class="tooltip">
+                <span class="question-mark">?</span>
+                <span class="tooltip-text">APR stands for Annual Percentage Rate. It represents the yearly interest rate charged on outstanding credit card balances.<a href="detailed_apr_page.html" target="_blank">Learn more</a></span>
+            </div>
         </div>
 
         <!-- Third input for max monthly payment -->
         <div class="form-group inline">
             <label for="maxMonthlyPayment">Max Monthly Payment:</label>
             <br> <!-- Add line break to move the input to the next line -->
-             <span class="currencyinput">$<input type="number" id="maxMonthlyPayment" name="maxMonthlyPayment" placeholder="Enter Max Monthly Payment" step="0.01" value="100" required>
+             <span class="currencyinput">$<input type="number" id="maxMonthlyPayment" name="maxMonthlyPayment" placeholder="Enter Max Monthly Payment" step="0.01" value="100" required></span>
+            <div class="tooltip">
+                <span class="question-mark">?</span>
+                <span class="tooltip-text">This is the maximum amount you can afford to pay towards your credit card balance each month.<a href="detailed_monthly_payment.html" target="_blank">Learn more</a></span>
+            </div>
         </div>
 
         <!-- Fourth input for extra monthly spend -->
         <div class="form-group inline">
             <label for="extraMonthlySpend">Extra Monthly Spend:</label>
             <br> <!-- Add line break to move the input to the next line -->
-             <span class="currencyinput">$<input type="number" id="extraMonthlySpend" name="extraMonthlySpend" placeholder="Enter Extra Monthly Spend" step="0.01" value="0" required>
+             <span class="currencyinput">$<input type="number" id="extraMonthlySpend" name="extraMonthlySpend" placeholder="Enter Extra Monthly Spend" step="0.01" value="0" required></span>
+            <div class="tooltip">
+                <span class="question-mark">?</span>
+                <span class="tooltip-text">This is the additional amount you plan to spend on your credit card balance each month, beyond the minimum payment.<a href="detailed_monthly_spend.html" target="_blank">Learn more</a></span>
+            </div>
         </div>
         <div class="button-wrapper">
             <button type="submit" class="styled-button">Submit</button>
             <button type="button" id="compare-button" class="styled-button" onclick="window.location.href = '/compare';">Compare</button> 
         </div>
-    
-
-      </form>
-  </div>
+    </form>
+</div>
 
 <div id="months-to-payoff-container">
     <p id="months-to-payoff"></p>

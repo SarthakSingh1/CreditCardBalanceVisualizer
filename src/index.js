@@ -20,7 +20,6 @@ app.get('/', (req, res) => {
 // Route for form submission
 app.post('/calculate', (req, res) => {
     // Extract input data from request body
-    console.log("Called calculate route")
     const totalBalance = parseFloat(req.body.totalBalance);
     const apr = parseFloat(req.body.apr);
     const maxMonthlyPayment = parseFloat(req.body.maxMonthlyPayment);
@@ -32,7 +31,6 @@ app.post('/calculate', (req, res) => {
 
 
     // Send the response
-    console.log("Sent a response");
     res.send(calculationResult);
 });
 
