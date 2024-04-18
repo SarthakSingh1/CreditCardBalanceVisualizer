@@ -12,21 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let myPieChart; // Define myPieChart variable outside event listener
     let finalChart;
 
-    secondButton.addEventListener('click', function (event) {
-        event.preventDefault();
-
-        fetch('/compare') // Ensure this path matches the server route
-            .then(response => response.text())
-            .then(html => {
-                document.body.innerHTML = html;
-                const element = document.getElementById('total-interest-paid');
-                element.textContent = 'New value';
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    });
-
     form.addEventListener('submit', function (event) {
         event.preventDefault(); // Prevent default form submission
 
