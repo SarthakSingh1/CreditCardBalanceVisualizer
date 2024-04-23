@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+
     let myDonutChart1; 
     let myInterestBarChart1; 
     let myBasicBarChart1;
@@ -28,17 +29,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Serialize form data
         const formData = new FormData(form);
+
+        const urlParams = new URLSearchParams(window.location.search);
+
+        const oldForm = {
+            totalBalance1: urlParams.get('totalBalance'),
+            apr1: urlParams.get('apr'),
+            maxMonthlyPayment1: urlParams.get('maxMonthlyPayment'),
+            extraMonthlySpend1: urlParams.get('extraMonthlySpend'),
+            paymentType: urlParams.get('paymentType')
+        };
+
+        
+
+        // console.log("compare submit hit");
+        // console.log(newData);
+
+
+        
         const serializedForm = {};
         for (const [key, value] of formData.entries()) {
             serializedForm[key] = value;
         }
+
+        const mergedDict = Object.assign({}, serializedForm, oldForm);
+
+        console.log(mergedDict);
+
+
         // Send form data to server using AJAX request
         fetch('/calculateCompare', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(serializedForm)
+            body: JSON.stringify(mergedDict)
         })
             .then(response => response.json())
             .then(data => {
