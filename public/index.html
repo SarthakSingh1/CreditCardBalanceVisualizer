@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-group inline">
-        <label for="paymentType">Months or max monthly payment</label>
+        <label for="paymentType">Months or Max Monthly Payment</label>
             <select id="paymentType" name="paymentType" required>
             <option value="totalMonths">Total Months</option>
             <option value="maxMonthlyPayment">Max Monthly Payment</option>
@@ -64,7 +64,7 @@
         </div>
         <div class="button-wrapper">
             <button type="submit" class="styled-button">Submit</button>
-            <button type="button" id="compare-button" class="styled-button" onclick="window.location.href = '/compare';">Compare</button> 
+            <button type="button" id="compare-button" class="styled-button">Compare</button>
         </div>
 
     </form>
@@ -104,5 +104,21 @@
   <!-- Script for Chart.js and your custom JavaScript code -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="renderGraph.js"> </script>
+  <script>
+        document.getElementById('compare-button').addEventListener('click', function () {
+        // Gather form data
+        const totalBalance = document.getElementById('totalBalance').value;
+        const apr = document.getElementById('apr').value;
+        const paymentType = document.getElementById('paymentType').value;
+        const maxMonthlyPayment = document.getElementById('maxMonthlyPayment').value;
+        const extraMonthlySpend = document.getElementById('extraMonthlySpend').value;
+
+        // Construct URL with query parameters
+        const queryParams = `?totalBalance=${totalBalance}&apr=${apr}&paymentType=${paymentType}&maxMonthlyPayment=${maxMonthlyPayment}&extraMonthlySpend=${extraMonthlySpend}`;
+
+        // Redirect to /compare route with form data
+        window.location.href = '/compare' + queryParams;
+    });
+  </script>
 </body>
 </html>

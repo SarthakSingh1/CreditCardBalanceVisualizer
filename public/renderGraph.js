@@ -11,21 +11,31 @@ document.addEventListener("DOMContentLoaded", function () {
     let myChart; // Define myChart variable outside event listener
     let myPieChart; // Define myPieChart variable outside event listener
     let finalChart;
+    const paymentTypeSelect = document.getElementById('paymentType');
+    const outputValue = document.getElementById('months-to-payoff');
 
-    secondButton.addEventListener('click', function (event) {
-        event.preventDefault();
+    // Add event listener for change event
+    paymentTypeSelect.addEventListener('change', function () {
+        // Check the selected value
+        const selectedValue = paymentTypeSelect.value;
+        const labelElement = document.querySelector('label[for="maxMonthlyPayment"]');
 
-        fetch('/compare') // Ensure this path matches the server route
-            .then(response => response.text())
-            .then(html => {
-                document.body.innerHTML = html;
-                const element = document.getElementById('total-interest-paid');
-                element.textContent = 'New value';
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+        // Depending on the selected value, execute your script
+        if (selectedValue === 'totalMonths') {
+            // Code to execute when "Total Months" is selected
+            console.log('Total Months selected');
+            labelElement.textContent = "Total Months:";
+            outputValue.textContent = "Monthly Payment"
+            // Run your script here
+        } else if (selectedValue === 'maxMonthlyPayment') {
+            // Code to execute when "Max Monthly Payment" is selected
+            console.log('Max Monthly Payment selected');
+            labelElement.textContent = "Max Monthly Payment:";
+            outputValue.textContent = "Months to Payoff";
+            // Run your script here
+        }
     });
+
 
     form.addEventListener('submit', function (event) {
         event.preventDefault(); // Prevent default form submission
