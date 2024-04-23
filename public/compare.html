@@ -3,70 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Credit Card Payoff Calculator</title>
+  <title>Credit Card Compare Feature</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
     <div class="button-wrapper">
     <a href="/" class="styled-button">Back to Home</a>
+        <h1>Credit Card Compare Feature</h1>
 </div>
 
+    <table>
+        <tr>
+            <th>Original Paramater</th>
+            <th>Original Value </th>
+        </tr>
+        <tr>
+            <td>Total Balance</td>
+            <td id="totalBalance"></td>
+        </tr>
+        <tr>
+            <td>APR</td>
+            <td id="apr"></td>
+        </tr>
+        <tr>
+        <td id="maxMonthlyPaymentTable">Max Monthly Payment</td>
+            <td id="maxMonthlyPayment"></td>
+        </tr>
+        <tr>
+            <td>Extra Monthly Spend</td>
+            <td id="extraMonthlySpend"></td>
+        </tr>
+    </table>
+
  <div class="form-container">
-    <h1>Credit Card Payoff Calculator</h1>
     <form id="calculator-form" class="input-form">
-
-        <div class="compare-form-group-select">
-        <label for="paymentType">Months or max monthly payment</label>
-            <select id="paymentType" name="paymentType" required>
-            <option value="totalMonths">Total Months</option>
-            <option value="maxMonthlyPayment">Max Monthly Payment</option>
-                </select>
-        </div>
-
-
-        <!-- First input for total balance of credit card -->
-        <div class="compare-form-group inline">
-            <label for="totalBalance">Total Balance of Credit Card:</label>
-            <br> <!-- Add line break to move the input to the next line -->
-            <span class="currencyinput">$<input type="number" id="totalBalance1" name="totalBalance1" placeholder="Enter Total Balance" step="0.01" value="1000" required>
-       <div class="tooltip">
-            <span class="question-mark">?</span>
-            <span class="tooltip-text">This is the total outstanding balance on your credit card. <a href="detailed_balance_page.html" target="_blank">Learn more</a></span>
-        </div>
-            </div>
-
-        <!-- Second input for APR -->
-        <div class="compare-form-group inline">
-            <label for="apr">APR:</label>
-            <br> <!-- Add line break to move the input to the next line -->
-            <input type="number" id="apr1" name="apr1" placeholder="Enter APR" step="0.01" min="0" value="15" required>
-        <div class="tooltip">
-                <span class="question-mark">?</span>
-                <span class="tooltip-text">APR stands for Annual Percentage Rate. It represents the yearly interest rate charged on outstanding credit card balances.<a href="detailed_apr_page.html" target="_blank">Learn more</a></span>
-            </div>
-        </div>
-
-        <!-- Third input for max monthly payment -->
-        <div class="compare-form-group inline">
-            <label for="maxMonthlyPayment">Max Monthly Payment/Total Months:</label>
-            <br> <!-- Add line break to move the input to the next line -->
-             <input type="number" id="maxMonthlyPayment1" name="maxMonthlyPayment1" placeholder="Enter Max Monthly Payment" step="0.01" value="100" required>
-        <div class="tooltip">
-                <span class="question-mark">?</span>
-                <span class="tooltip-text">If you selected max monthly payment this is the maximum amount you can afford to pay towards your credit card balance each month.<a href="detailed_monthly_payment.html" target="_blank">Learn more</a></span>
-            </div>
-            </div>
-
-        <!-- Fourth input for extra monthly spend -->
-        <div class="compare-form-group inline">
-            <label for="extraMonthlySpend">Extra Monthly Spend:</label>
-            <br> <!-- Add line break to move the input to the next line -->
-             <span class="currencyinput">$<input type="number" id="extraMonthlySpend1" name="extraMonthlySpend1" placeholder="Enter Extra Monthly Spend" step="0.01" value="0" required>
-            <div class="tooltip">
-                <span class="question-mark">?</span>
-                <span class="tooltip-text">This is the additional amount you plan to spend on your credit card balance each month, beyond the minimum payment.<a href="detailed_monthly_spend.html" target="_blank">Learn more</a></span>
-            </div>
-            </div>
 
         <div class="compare-form-group-second inline">
             <label for="totalBalance">Total Balance of Credit Card:</label>
@@ -91,7 +62,7 @@
 
         <!-- Third input for max monthly payment -->
         <div class="compare-form-group-second inline">
-            <label for="maxMonthlyPayment">Max Monthly Payment/Total Months:</label>
+        <label for="maxMonthlyPayment" id="maxMonthlyPaymentLabel">Max Monthly Payment/Total Months:</label>
             <br> <!-- Add line break to move the input to the next line -->
             <input type="number" id="maxMonthlyPayment2" name="maxMonthlyPayment2" placeholder="Enter Max Monthly Payment" step="0.01" value="100" required>
             <div class="tooltip">
@@ -224,5 +195,35 @@
 
 
   </script>
+
+   <script>
+        // Get query parameters from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const maxMonthlyPaymentLabel = document.getElementById('maxMonthlyPaymentLabel');
+        const maxMonthlyPaymentTable = document.getElementById('maxMonthlyPaymentTable');
+        const monthsToPayoff1 = document.getElementById('months-to-payoff-1');
+        const monthsToPayoff2 = document.getElementById('months-to-payoff-2');
+
+
+        // Display parameters in the table
+        document.getElementById('totalBalance').textContent = urlParams.get('totalBalance');
+        document.getElementById('apr').textContent = urlParams.get('apr');
+ 
+        if (urlParams.get('paymentType') == "totalMonths" ) {
+            maxMonthlyPaymentLabel.textContent = "Total Months";
+            maxMonthlyPaymentTable.textContent = "Total Months";
+            monthsToPayoff1.textContent = "Monthly Payment";
+            monthsToPayoff2.textContent = "Monthly Payment";
+
+        } else {
+            maxMonthlyPaymentLabel.textContent = "Max Monthly Payment";
+            maxMonthlyPaymentTable.textContent = "Max Monthly Payment";
+            monthsToPayoff1.textContent = "Months till payoff";
+            monthsToPayoff2.textContent = "Months till payoff";
+        }
+        
+        document.getElementById('maxMonthlyPayment').textContent = urlParams.get('maxMonthlyPayment');
+        document.getElementById('extraMonthlySpend').textContent = urlParams.get('extraMonthlySpend');
+    </script>
 </body>
 </html>

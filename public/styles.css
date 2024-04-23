@@ -336,17 +336,41 @@ input[type="number"] {
     visibility: visible;
     opacity: 1;
 }
-        body {
+                body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #f9f9f9; /* Background color */
             margin: 0;
-            padding: 0;
+            padding: 20px;
         }
 
-        .title {
+        h1 {
             text-align: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 36px;
-            color: #2c3e50; /* Dark blue */
-            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 80%; /* Adjust the width here */
+            margin: 0 auto;
+            background-color: #ffffff; /* Table background color */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow */
+            overflow: hidden; /* Prevents shadow from overflowing */
+            border-collapse: collapse;
+            margin-bottom: 20px; /* Padding on the bottom */
+
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5; /* Hover color */
         }
