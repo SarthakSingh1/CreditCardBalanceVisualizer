@@ -1,124 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Credit Card Payoff Calculator</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<div class="form-container">
-    <h1>Credit Card Payoff Calculator</h1>
-    <form id="calculator-form" class="input-form">
-        <!-- First input for total balance of credit card -->
-        <div class="form-group inline">
-            <label for="totalBalance">Total Balance of Credit Card:</label>
-            <br> <!-- Add line break to move the input to the next line -->
-            <span class="currencyinput">$<input type="number" id="totalBalance" name="totalBalance" placeholder="Enter Total Balance" step="0.01" value="1000" required></span>
-        <div class="tooltip">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Credit Card Payoff Calculator</title>
+      <link rel="stylesheet" href="styles.css">
+   </head>
+   <body>
+      <div class="form-container">
+         <h1>Credit Card Payoff Calculator</h1>
+         <form id="calculator-form" class="input-form">
+            <!-- First input for total balance of credit card -->
+            <div class="form-group inline">
+               <label for="totalBalance">Total Balance of Credit Card:</label>
+               <br> <!-- Add line break to move the input to the next line -->
+               <span class="currencyinput">$<input type="number" id="totalBalance" name="totalBalance" placeholder="Enter Total Balance" step="0.01" value="1000" required></span>
+               <div class="tooltip">
+                  <span class="question-mark">?</span>
+                  <span class="tooltip-text">This is the total amount you currently owe to the credit card issuer (e.g. Synchrony). It can include purchases, fees, and interest charges. You can find this amount by checking your monthly statement. <a href="https://www.investopedia.com/terms/c/credit-card-balance.asp" target="_blank">Learn more</a></span>
+               </div>
+            </div>
+            <!-- Second input for APR -->
+            <div class="form-group inline">
+               <label for="apr">Annual Percentage Rate:</label>
+               <br> <!-- Add line break to move the input to the next line -->
+               <input type="number" id="apr" name="apr" placeholder="Enter APR" step="0.01" min="0" value="15" required>
+               <div class="tooltip">
+                  <span class="question-mark">?</span>
+                  <span class="tooltip-text">This is considered your annual interest rate. If you don’t pay off your balance in time, you may incur interest at this rate. This can be found in your credit card agreement, your most recent statement, or on the card issuer’s website. <a href="https://www.investopedia.com/terms/a/apr.asp" target="_blank">Learn more</a></span>
+               </div>
+            </div>
+            <div class="form-group inline">
+               <label for="paymentType">Months or Max Monthly Payment</label>
+               <select id="paymentType" name="paymentType" required>
+                  <option value="totalMonths">Total Months</option>
+                  <option value="maxMonthlyPayment">Max Monthly Payment</option>
+               </select>
+            </div>
+            <!-- Third input for max monthly payment -->
+            <div class="form-group inline">
+               <label for="maxMonthlyPayment">Max Monthly Payment/Total Months:</label>
+               <br> <!-- Add line break to move the input to the next line -->
+               <input type="number" id="maxMonthlyPayment" name="maxMonthlyPayment" placeholder="Enter Max Monthly Payment" step="0.01" value="12" required>
+               <div class="tooltip">
+                  <span class="question-mark">?</span>
+                <span id="maxMonthlyPaymentTooltip" class="tooltip-text">If you selected max monthly payment this is the maximum amount you can afford to pay towards your credit card balance each month.<a href="https://www.investopedia.com/how-do-credit-card-payments-work-5069924#:~:text=The%20monthly%20payment%20on%20a,will%20vary%20on%20the%20provider" target="_blank">Learn more</a></span>
+               </div>
+            </div>
+            <!-- Fourth input for extra monthly spend -->
+            <div class="form-group inline">
+               <label for="extraMonthlySpend">Extra Monthly Spend:</label>
+               <br> <!-- Add line break to move the input to the next line -->
+               <span class="currencyinput">$<input type="number" id="extraMonthlySpend" name="extraMonthlySpend" placeholder="Enter Extra Monthly Spend" step="0.01" value="0" required></span>
+               <div class="tooltip">
+                  <span class="question-mark">?</span>
+                  <span class="tooltip-text">  Please estimate the amount you expect to spend in future months. This amount will be factored into the monthly payment to ensure you can manage any current debt while also considering any upcoming expenses.<a href="https://www.nerdwallet.com/article/finance/nerdwallet-budget-calculator" target="_blank">Learn more</a></span>
+               </div>
+            </div>
+            <div class="button-wrapper">
+               <button type="submit" class="styled-button">Submit</button>
+               <button type="button" id="compare-button" class="styled-button">Compare</button>
+            </div>
+         </form>
+      </div>
+      <div id="months-to-payoff-container">
+         <p id="months-to-payoff">Monthly Payment or Months to Payoff:</p>
+         <div class="tooltip">
             <span class="question-mark">?</span>
-            <span class="tooltip-text">This is the total outstanding balance on your credit card. <a href="detailed_balance_page.html" target="_blank">Learn more</a></span>
-        </div>
-        </div>
+            <span id="monthsToPayoff"   class="tooltip-text">Depending on what you pick this will be different <a href="https://www.transunion.com/blog/debt-management/credit-card-101-paying-the-balance-vs-paying-the-minimum" target="_blank">Learn more</a></span>
+         </div>
+      </div>
+      <div id="total-interest-paid-container">
+         <p id="total-interest-paid">Total Interest Paid: </p>
+         <div class="tooltip">
+            <span class="question-mark">?</span>
+            <span class="tooltip-text">This is the total interest you would pay in the timeframe that was calculated or that you selected. <a href="https://www.investopedia.com/articles/01/061301.asp" target="_blank">Learn more</a></span>
+         </div>
+      </div>
 
-        <!-- Second input for APR -->
-        <div class="form-group inline">
-            <label for="apr">Annual Percentage Rate:</label>
-            <br> <!-- Add line break to move the input to the next line -->
-            <input type="number" id="apr" name="apr" placeholder="Enter APR" step="0.01" min="0" value="15" required>
-            <div class="tooltip">
-                <span class="question-mark">?</span>
-                <span class="tooltip-text">APR stands for Annual Percentage Rate. It represents the yearly interest rate charged on outstanding credit card balances.<a href="detailed_apr_page.html" target="_blank">Learn more</a></span>
-            </div>
-        </div>
-
-        <div class="form-group inline">
-        <label for="paymentType">Months or Max Monthly Payment</label>
-            <select id="paymentType" name="paymentType" required>
-            <option value="totalMonths">Total Months</option>
-            <option value="maxMonthlyPayment">Max Monthly Payment</option>
-                </select>
-            </div>
-
-
-        <!-- Third input for max monthly payment -->
-        <div class="form-group inline">
-            <label for="maxMonthlyPayment">Max Monthly Payment/Total Months:</label>
-            <br> <!-- Add line break to move the input to the next line -->
-            <input type="number" id="maxMonthlyPayment" name="maxMonthlyPayment" placeholder="Enter Max Monthly Payment" step="0.01" value="12" required>
-            <div class="tooltip">
-                <span class="question-mark">?</span>
-                <span class="tooltip-text">If you selected max monthly payment this is the maximum amount you can afford to pay towards your credit card balance each month.<a href="detailed_monthly_payment.html" target="_blank">Learn more</a></span>
-            </div>
-        </div>
-
-        <!-- Fourth input for extra monthly spend -->
-        <div class="form-group inline">
-            <label for="extraMonthlySpend">Extra Monthly Spend:</label>
-            <br> <!-- Add line break to move the input to the next line -->
-             <span class="currencyinput">$<input type="number" id="extraMonthlySpend" name="extraMonthlySpend" placeholder="Enter Extra Monthly Spend" step="0.01" value="0" required></span>
-            <div class="tooltip">
-                <span class="question-mark">?</span>
-                <span class="tooltip-text">This is the additional amount you plan to spend on your credit card balance each month, beyond the minimum payment.<a href="detailed_monthly_spend.html" target="_blank">Learn more</a></span>
-            </div>
-        </div>
-        <div class="button-wrapper">
-            <button type="submit" class="styled-button">Submit</button>
-            <button type="button" id="compare-button" class="styled-button">Compare</button>
-        </div>
-
-    </form>
-</div>
-
-<div id="months-to-payoff-container">
-    <p id="months-to-payoff">Monthly Payment or Months to Payoff:</p>
-     <div class="tooltip">
-                <span class="question-mark">?</span>
-                <span class="tooltip-text">words words words <a href="detailed_monthly_spend.html" target="_blank">Learn more</a></span>
-    </div>
-
-</div>
-<div id="total-interest-paid-container">
-    <p id="total-interest-paid">Total Interest Paid: </p>
-    <div class="tooltip">
-                <span class="question-mark">?</span>
-                <span class="tooltip-text">words words words <a href="detailed_monthly_spend.html" target="_blank">Learn more</a></span>
-    </div>
-</div>
-
-
-
-<div class="chart-container">
-    <div class="pie-chart-container">
-        <canvas id="myPieChart" width="200" height="200"></canvas>
-    </div>
-    <div class="line-chart-container">
-        <canvas id="myChart" width="800" height="200"></canvas>
-    </div>
-    <div class="additional-chart-container"> <!-- New container for additional chart -->
-        <canvas id="additionalChart" width="400" height="200"></canvas> <!-- New canvas for additional chart -->
-    </div>
-</div>
-
-
-  <!-- Script for Chart.js and your custom JavaScript code -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="renderGraph.js"> </script>
-  <script>
-        document.getElementById('compare-button').addEventListener('click', function () {
-        // Gather form data
-        const totalBalance = document.getElementById('totalBalance').value;
-        const apr = document.getElementById('apr').value;
-        const paymentType = document.getElementById('paymentType').value;
-        const maxMonthlyPayment = document.getElementById('maxMonthlyPayment').value;
-        const extraMonthlySpend = document.getElementById('extraMonthlySpend').value;
-
-        // Construct URL with query parameters
-        const queryParams = `?totalBalance=${totalBalance}&apr=${apr}&paymentType=${paymentType}&maxMonthlyPayment=${maxMonthlyPayment}&extraMonthlySpend=${extraMonthlySpend}`;
-
-        // Redirect to /compare route with form data
-        window.location.href = '/compare' + queryParams;
-    });
-  </script>
-</body>
+      <div class="chart-container">
+         <div class="pie-chart-container">
+            <canvas id="myPieChart" width="200" height="200"></canvas>
+         </div>
+         <div class="line-chart-container" >
+            <canvas id="myChart" width="800" height="200"></canvas>
+         </div>
+         <div class="additional-chart-container">
+            <canvas id="additionalChart" width="400" height="200"></canvas>
+         </div>
+      </div>
+      <!-- Script for Chart.js and your custom JavaScript code -->
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script src="renderGraph.js"> </script>
+      <script>
+         document.getElementById('compare-button').addEventListener('click', function () {
+         // Gather form data
+         const totalBalance = document.getElementById('totalBalance').value;
+         const apr = document.getElementById('apr').value;
+         const paymentType = document.getElementById('paymentType').value;
+         const maxMonthlyPayment = document.getElementById('maxMonthlyPayment').value;
+         const extraMonthlySpend = document.getElementById('extraMonthlySpend').value;
+         
+         // Construct URL with query parameters
+         const queryParams = `?totalBalance=${totalBalance}&apr=${apr}&paymentType=${paymentType}&maxMonthlyPayment=${maxMonthlyPayment}&extraMonthlySpend=${extraMonthlySpend}`;
+         
+         // Redirect to /compare route with form data
+         window.location.href = '/compare' + queryParams;
+         });
+      </script>
+   </body>
 </html>

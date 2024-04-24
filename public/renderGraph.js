@@ -6,7 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const ctxPie = document.getElementById('myPieChart').getContext('2d'); // Get context for pie chart
     const final_cart = document.getElementById('additionalChart').getContext('2d');
     const secondButton = document.getElementById('compare-button');
-
+    const monthlyToolTip = document.getElementById('maxMonthlyPaymentTooltip');
+    const payoffMonth = document.getElementById('monthsToPayoff');
 
     let myChart; // Define myChart variable outside event listener
     let myPieChart; // Define myPieChart variable outside event listener
@@ -19,20 +20,23 @@ document.addEventListener("DOMContentLoaded", function () {
         // Check the selected value
         const selectedValue = paymentTypeSelect.value;
         const labelElement = document.querySelector('label[for="maxMonthlyPayment"]');
-
+        const textNode = monthlyToolTip.childNodes[0];
+        const monthsTextNode = payoffMonth.childNodes[0];
         // Depending on the selected value, execute your script
         if (selectedValue === 'totalMonths') {
             // Code to execute when "Total Months" is selected
             console.log('Total Months selected');
             labelElement.textContent = "Total Months:";
-            outputValue.textContent = "Monthly Payment"
-            // Run your script here
+            outputValue.textContent = "Monthly Payment";
+            textNode.textContent = "Please indicate the number of months in which you want to pay off your balance. Keep in mind that the longer you extend this period, the more interest you will end up paying overall. ";
+            monthsTextNode.textContent = "This is the monthly payment needed to pay off your balance in the number of months you selected. ";
         } else if (selectedValue === 'maxMonthlyPayment') {
             // Code to execute when "Max Monthly Payment" is selected
             console.log('Max Monthly Payment selected');
             labelElement.textContent = "Max Monthly Payment:";
             outputValue.textContent = "Months to Payoff";
-            // Run your script here
+            textNode.textContent = "Please indicate the monthly payment you prefer to contribute towards paying off your balance. Keep in mind that opting for a lower payment will result in higher interest charges and a longer duration to pay off your balance. ";
+            monthsTextNode.textContent = "This is the number of months needed to pay off your balance by making monthly payments at the amount you selected. ";
         }
     });
 

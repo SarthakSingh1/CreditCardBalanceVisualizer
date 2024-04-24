@@ -295,20 +295,20 @@ input[type="number"] {
 .tooltip {
     position: relative;
     display: inline-block;
-    text-align: center; /
+    text-align: center;
 }
 
 .question-mark {
     cursor: pointer;
     color: rgb(0, 0, 0);
     font-size: 20px;
-    width: 20px; 
+    width: 20px;
     height: 20px;
-    background-color: #FBC600; 
-    border-radius: 50%; 
+    background-color: #FBC600;
+    border-radius: 50%;
     text-align: center;
     display: inline-block;
-    padding: 5px; 
+    padding: 5px;
 }
 
 .tooltip-content {
@@ -319,10 +319,10 @@ input[type="number"] {
 .tooltip-text {
     visibility: hidden;
     width: 200px;
-    background-color: #FBC600; 
+    background-color: #FBC600;
     color: black;
     text-align: center;
-    padding: 10px; 
+    padding: 10px;
     border-radius: 6px;
     position: absolute;
     z-index: 1;
@@ -337,12 +337,13 @@ input[type="number"] {
     opacity: 1;
 }
 
-                body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9; /* Background color */
-            margin: 0;
-            padding: 20px;
-        }
+
+      body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9; /* Background color */
+      margin: 0;
+      padding: 20px;
+      }
 
         h1 {
             text-align: center;
