@@ -13,9 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const interestBarChart2 = document.getElementById('interestBarChart2').getContext('2d'); // Get context for pie chart
     const basicBarChart2 = document.getElementById('basicBarChart2').getContext('2d');
 
-
-
-
     let myDonutChart1; 
     let myInterestBarChart1; 
     let myBasicBarChart1;

@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
             labelElement.textContent = "Max Monthly Payment:";
             outputValue.textContent = "Months to Payoff";
             textNode.textContent = "Please indicate the monthly payment you prefer to contribute towards paying off your balance. Keep in mind that opting for a lower payment will result in higher interest charges and a longer duration to pay off your balance. ";
-            monthsTextNode.textContent = "This is the number of months needed to pay off your balance by making monthly payments at the amount you selected. ";
+            monthsTextNode.textContent = "This is the number of months needed to pay off your balance by making monthly payments at the amount you selected. ";
         }
     });
 
@@ -144,7 +144,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (data.monthlyPayment != null) {
                     monthsToPayoffContainer.textContent = `Monthly Payment $${data.monthlyPayment.toFixed(2)}`;
                 } else {
+                    if (data.months == 0) {
+                        monthsToPayoffContainer.textContent = `Impossible to pay off card`;
+                    } else {
                 monthsToPayoffContainer.textContent = `Months to Payoff: ${data.months}`;
+                    }
                 }
                 let roundedInterest = data.totalInterest.toFixed(2);
 

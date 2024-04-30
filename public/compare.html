@@ -45,7 +45,7 @@
             <span class="currencyinput">$<input type="number" id="totalBalance2" name="totalBalance2" placeholder="Enter Total Balance" step="0.01" value="1000" required>
         <div class="tooltip">
             <span class="question-mark">?</span>
-            <span class="tooltip-text">This is the total outstanding balance on your credit card. <a href="detailed_balance_page.html" target="_blank">Learn more</a></span>
+                  <span class="tooltip-text">This is the total amount you currently owe to the credit card issuer (e.g. Synchrony). It can include purchases, fees, and interest charges. You can find this amount by checking your monthly statement. <a href="https://www.investopedia.com/terms/c/credit-card-balance.asp" target="_blank">Learn more</a></span>
         </div>
         </div>
 
@@ -56,7 +56,7 @@
             <input type="number" id="apr2" name="apr2" placeholder="Enter APR" step="0.01" min="0" value="15" required>
              <div class="tooltip">
                 <span class="question-mark">?</span>
-                <span class="tooltip-text">APR stands for Annual Percentage Rate. It represents the yearly interest rate charged on outstanding credit card balances.<a href="detailed_apr_page.html" target="_blank">Learn more</a></span>
+                  <span class="tooltip-text">This is considered your annual interest rate. If you don't pay off your balance in time, you may incur interest at this rate. This can be found in your credit card agreement, your most recent statement, or on the card issuer’s website. <a href="https://www.investopedia.com/terms/a/apr.asp" target="_blank">Learn more</a></span>
             </div>
         </div>
 
@@ -67,7 +67,7 @@
             <input type="number" id="maxMonthlyPayment2" name="maxMonthlyPayment2" placeholder="Enter Max Monthly Payment" step="0.01" value="100" required>
             <div class="tooltip">
                 <span class="question-mark">?</span>
-                <span class="tooltip-text">If you selected max monthly payment this is the maximum amount you can afford to pay towards your credit card balance each month.<a href="detailed_monthly_payment.html" target="_blank">Learn more</a></span>
+                <span id="maxMonthlyPaymentTooltip" class="tooltip-text">If you selected max monthly payment this is the maximum amount you can afford to pay towards your credit card balance each month.<a href="https://www.investopedia.com/how-do-credit-card-payments-work-5069924#:~:text=The%20monthly%20payment%20on%20a,will%20vary%20on%20the%20provider" target="_blank">Learn more</a></span>
             </div>
         </div>
 
@@ -78,7 +78,7 @@
              <span class="currencyinput">$<input type="number" id="extraMonthlySpend2" name="extraMonthlySpend2" placeholder="Enter Extra Monthly Spend" step="0.01" value="0" required>
             <div class="tooltip">
                 <span class="question-mark">?</span>
-                <span class="tooltip-text">This is the additional amount you plan to spend on your credit card balance each month, beyond the minimum payment.<a href="detailed_monthly_spend.html" target="_blank">Learn more</a></span>
+                  <span class="tooltip-text">  Please estimate the amount you expect to spend in future months. This amount will be factored into the monthly payment to ensure you can manage any current debt while also considering any upcoming expenses.<a href="https://www.nerdwallet.com/article/finance/nerdwallet-budget-calculator" target="_blank">Learn more</a></span>
             </div>
         </div>
  
@@ -136,14 +136,14 @@
             <p id="months-to-payoff-1">Monthly Payment or Months to Payoff:</p>
     <div class="tooltip">
                 <span class="question-mark">?</span>
-                <span class="tooltip-text">words words words <a href="detailed_monthly_spend.html" target="_blank">Learn more</a></span>
+            <span id="monthsToPayoff"   class="tooltip-text">Depending on what you pick this will be different <a href="https://www.transunion.com/blog/debt-management/credit-card-101-paying-the-balance-vs-paying-the-minimum" target="_blank">Learn more</a></span>
     </div>
         </div>
         <div id="total-interest-paid-container">
             <p id="total-interest-paid-1">Total Interest Paid:</p>
                  <div class="tooltip">
                 <span class="question-mark">?</span>
-                <span class="tooltip-text">words words words <a href="detailed_monthly_spend.html" target="_blank">Learn more</a></span>
+            <span class="tooltip-text">This is the total interest you would pay in the timeframe that was calculated or that you selected. <a href="https://www.investopedia.com/articles/01/061301.asp" target="_blank">Learn more</a></span>
     </div>
         </div>
     </div>
@@ -152,14 +152,14 @@
             <p id="months-to-payoff-2">Monthly Payment or Months to Payoff:</p>
                  <div class="tooltip">
                 <span class="question-mark">?</span>
-                <span class="tooltip-text">words words words <a href="detailed_monthly_spend.html" target="_blank">Learn more</a></span>
+            <span id="monthsToPayoff"   class="tooltip-text">Depending on what you pick this will be different <a href="https://www.transunion.com/blog/debt-management/credit-card-101-paying-the-balance-vs-paying-the-minimum" target="_blank">Learn more</a></span>
     </div>
         </div>
         <div id="total-interest-paid-container">
             <p id="total-interest-paid-2">Total Interest Paid:</p>
                  <div class="tooltip">
                 <span class="question-mark">?</span>
-                <span class="tooltip-text">words words words <a href="detailed_monthly_spend.html" target="_blank">Learn more</a></span>
+            <span class="tooltip-text">This is the total interest you would pay in the timeframe that was calculated or that you selected. <a href="https://www.investopedia.com/articles/01/061301.asp" target="_blank">Learn more</a></span>
     </div>
         </div>
     </div>
@@ -203,7 +203,11 @@
         const maxMonthlyPaymentTable = document.getElementById('maxMonthlyPaymentTable');
         const monthsToPayoff1 = document.getElementById('months-to-payoff-1');
         const monthsToPayoff2 = document.getElementById('months-to-payoff-2');
+        const monthlyToolTip = document.getElementById('maxMonthlyPaymentTooltip');
+        const textNode = monthlyToolTip.childNodes[0];
+        var elements = document.querySelectorAll('#monthsToPayoff');
 
+// Iterate over each element and update its content
 
         // Display parameters in the table
         document.getElementById('totalBalance').textContent = urlParams.get('totalBalance');
@@ -214,12 +218,22 @@
             maxMonthlyPaymentTable.textContent = "Total Months";
             monthsToPayoff1.textContent = "Monthly Payment";
             monthsToPayoff2.textContent = "Monthly Payment";
-
+            textNode.textContent = "Please indicate the number of months in which you want to pay off your balance. Keep in mind that the longer you extend this period, the more interest you will end up paying overall. ";
+            elements.forEach(function(element) {
+                // Update the content of each element
+                element.textContent = "This is the monthly payment needed to pay off your balance in the number of months you selected.";
+            });
         } else {
             maxMonthlyPaymentLabel.textContent = "Max Monthly Payment";
             maxMonthlyPaymentTable.textContent = "Max Monthly Payment";
             monthsToPayoff1.textContent = "Months till payoff";
             monthsToPayoff2.textContent = "Months till payoff";
+            textNode.textContent = "Please indicate the monthly payment you prefer to contribute towards paying off your balance. Keep in mind that opting for a lower payment will result in higher interest charges and a longer duration to pay off your balance. ";
+            elements.forEach(function(element) {
+    // Update the content of each element
+                element.textContent = "This is the number of months needed to pay off your balance by making monthly payments at the amount you selected";
+            });
+
         }
         
         document.getElementById('maxMonthlyPayment').textContent = urlParams.get('maxMonthlyPayment');
